@@ -1,0 +1,32 @@
+{
+  "name": "short-url",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bihtyu/short-url.git"
+  },
+  "dependencies": {
+    "@cloudbase/node-sdk": "2.6.1",
+    "got": "11.8.2",
+    "nanoid": "3.1.23",
+    "redis": "3.1.2"
+  },
+  "devDependencies": {
+    "@types/redis": "2.8.31",
+    "@vercel/node": "1.11.1",
+    "ts-standard": "10.0.0",
+    "vercel": "^23.1.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bihtyu/short-url/issues"
+  },
+  "homepage": "https://github.com/bihtyu/short-url#readme"
+}
