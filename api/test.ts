@@ -1,6 +1,6 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
 const { MongoClient } = require('mongodb')
-import { MONGODB_CONNECTION_STRING, DB_NAME } from '../DBConfig.js'
+import { MONGODB_CONNECTION_STRING, DB_NAME } from '../DB/config.js'
 
 async function _connect(client) {
   return await new Promise(resolve => {

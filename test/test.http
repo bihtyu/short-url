@@ -1,0 +1,15 @@
+###
+POST http://localhost:3000/create
+content-type: application/json
+
+{
+  "url": "https://baidu.com",
+  "slug": ""
+}
+
+###
+GET http://localhost:3000/zfwowQ
+
+###
+GET https://gx.creditft.net.cn/gxfin/gateway/finance-basic/canton/getBeanPage?current=1&size=10
+token: 988d79c45c194968867ddc24e28235a4

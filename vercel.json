@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/test", "destination": "/api/test" }
+    { "source": "/create", "destination": "/api/create" },
+    { "source": "/:slug", "destination": "/api/jump" }
   ]
 }
