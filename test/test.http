@@ -1,5 +1,5 @@
 ###
-POST http://localhost:3000/create
+POST https://vercel.bihtyu.com/create
 content-type: application/json
 
 {

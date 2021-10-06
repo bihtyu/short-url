@@ -7,4 +7,9 @@ export default defineConfig({
   // build: {
   //   outDir: './public'
   // }
+  server: {
+    proxy: {
+      '/api': 'https://vercel.bihtyu.com/'
+    }
+  }
 })
