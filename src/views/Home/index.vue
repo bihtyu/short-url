@@ -55,8 +55,7 @@ export default defineComponent({
     })
     const btnLoading = ref(false)
     const formRef = ref(null)
-
-    window.$message = useMessage()
+    const message = useMessage()
 
     const handleValidateButtonClick = (e) => {
       e.preventDefault()
@@ -66,15 +65,15 @@ export default defineComponent({
     const onSubmit = () => {
       btnLoading.value = true
 
-      window.$message.destroyAll()
-      window.$message.loading(
+      message.destroyAll()
+      message.loading(
         '短链生成中，请稍后...'
       )
     
       axios.post('/api/create', model).then(function(response) {
         model.url = response.data.link
-        window.$message.destroyAll()
-        window.$message.success('操作成功，请在第一个输入框查看结果', {
+        message.destroyAll()
+        message.success('操作成功，请在第一个输入框查看结果', {
           closable: true,
           duration: 5000
         })
@@ -82,8 +81,8 @@ export default defineComponent({
           btnLoading.value = false
         }, 20)
       }).catch(function (error) {
-        window.$message.destroyAll()
-        window.$message.error(error.response.data.message || 'Error', {
+        message.destroyAll()
+        message.error(error.response.data.message || 'Error', {
           closable: true,
           duration: 5000
         })
