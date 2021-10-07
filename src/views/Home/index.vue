@@ -25,7 +25,6 @@
       >Submit</n-button>
     </div>
   </n-form>
-  <n-message-provider />
 </template>
 
 <script>
@@ -38,9 +37,7 @@ import {
   NGradientText,
   useMessage
 } from 'naive-ui'
-
-// locale & dateLocale
-import { zhCN, dateZhCN } from 'naive-ui'
+import axios from 'axios'
 
 export default defineComponent({
   components: {
@@ -64,42 +61,33 @@ export default defineComponent({
     const handleValidateButtonClick = (e) => {
       e.preventDefault()
       onSubmit()
-        // formRef.value.validate((errors) => {
-        //   if (!errors) {
-        //     message.success('验证成功')
-        //   } else {
-        //     console.log(errors)
-        //     message.error('验证失败')
-        //   }
-        // })
     }
 
     const onSubmit = () => {
       btnLoading.value = true
+
+      window.$message.destroyAll()
       window.$message.loading(
         '短链生成中，请稍后...'
       )
-
-      fetch('/api/create', {
-        method: 'POST',
-        body: JSON.stringify(model),
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        })
-      }).then(res => res.json()).then(res => {
-        console.log(res)
-        model.url = res.link
-      }).catch(err => {
-        console.log(err)
-      }).finally(() => {
+    
+      axios.post('/api/create', model).then(function(response) {
+        model.url = response.data.link
         window.$message.destroyAll()
         window.$message.success('操作成功，请在第一个输入框查看结果', {
           closable: true,
-          duration: 3000
+          duration: 5000
         })
         setTimeout(() => {
           btnLoading.value = false
-        }, 200)
+        }, 20)
+      }).catch(function (error) {
+        window.$message.destroyAll()
+        window.$message.error(error.response.data.message || 'Error', {
+          closable: true,
+          duration: 5000
+        })
+        btnLoading.value = false
       })
     }
 
@@ -107,28 +95,21 @@ export default defineComponent({
       btnLoading,
       formRef,
       model,
-      handleValidateButtonClick,
-      zhCN,
-      dateZhCN,
+      handleValidateButtonClick
     }
-  },
+  }
 })
 </script>
-
-<style>
-  * {
-    font-family: v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    line-height: 1.6;
-  }
-</style>
 
 <style lang="scss" scoped>
 .main-form {
   width: 500px;
   margin: 200px auto;
   .title {
-    margin: 15px auto 15px 55px;
+    width: 100%;
+    margin: 15px auto;
     font-size: 26px;
+    text-align: center;
   }
   .operate-row {
     .n-button {
